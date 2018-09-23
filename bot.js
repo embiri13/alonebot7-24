@@ -94,6 +94,10 @@ client.on('message', async msg => {
       msg.react('🇸');
     }
     });
+ client.on('message', msg => {
+  if (/(https?:\/\/)?(www\.)?(discord\.(gg|li|me|io)|discordapp\.com\/invite)\/.+/.test(msg.content)) return msg.delete()
+  .then(() => msg.reply('**Reklam Yapmamalisin**'));
+  });
 client.elevation = message => {
   if(!message.guild) {
 	return; }
