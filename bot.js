@@ -88,30 +88,18 @@ client.on('message', msg => {
     msg.reply('**Öyle Olsun :sob: :sob:** ');
   }
 });
-client.on('guildCreate', guild => {
-    let channel = client.channels.get("kanal-id")//botun girdiyi sunucuyu kanala gönderelim
-    const embed = new Discord.RichEmbed()
-        .setColor("GREEN")
-        .setAuthor(`Giriş ${guild.name}`)
-        .setThumbnail(guild.iconURL)
-        .addField("Kurucu ", guild.owner.user.tag)
-        .addField("Sunucu ID", guild.id, true)
-        .addField("Toplam Kullanıcı", guild.memberCount, true)
-        .addField("Toplam Kanal", guild.channels.size, true)
-    channel.send(embed);
-});
-client.on('guildDelete', guild => { 
-    let channel = client.channels.get("kanal-id")//botun çıktıgı sunucuyu kanala gönderelim
 
-    const embed = new Discord.RichEmbed()
-        .setColor("RED")
-        .setAuthor(`Çıkış ${guild.name}`)
-        .setThumbnail(guild.iconURL)
-        .addField("Kurucu", guild.owner.user.tag)
-        .addField("Sunucu ID", guild.id, true)
-        .addField("Toplam Kullanıcı", guild.memberCount, true)
-        .addField("Toplam Kanal", guild.channels.size, true)
-    channel.send(embed);
+bot.on("message", msg => {
+  if (msg.content.toLowerCase().match(/(.co|.ne|.org)|.cf|.ml|.tk|.c o m|.n e t|.o r g|.m l|.t k/g) && !msg.author.bot && msg.channel.type === "text" && msg.channel.permissionsFor(msg.guild.member(bot.user)).has("MANAGE_MESSAGES")) {
+    if(msg.channel.permissionsFor(msg.guild.member(msg.author)).has("MANAGE_MESSAGES")) return;
+    msg.delete(500).then(deletedMsg => {
+      deletedMsg.reply("Website linki paylaştığını algıladık. Bu sunucuda **Alone** tarafından website linkleri engellenmektedir.").catch(e => {
+        console.error(e);
+      });
+    }).catch(e => {
+      console.error(e);
+    });
+  }
 });
 
 client.elevation = message => {
