@@ -89,19 +89,6 @@ client.on('message', msg => {
   }
 });
 
-client.on("message", msg => {
-  if (msg.content.toLowerCase().match(/(.co|.ne|.org)|.cf|.ml|.tk|.c o m|.n e t|.o r g|.m l|.t k/g) && !msg.author.bot && msg.channel.type === "text" && msg.channel.permissionsFor(msg.guild.member(bot.user)).has("MANAGE_MESSAGES")) {
-    if(msg.channel.permissionsFor(msg.guild.member(msg.author)).has("MANAGE_MESSAGES")) return;
-    msg.delete(500).then(deletedMsg => {
-      deletedMsg.reply("Website linki paylaştığını algıladık. Bu sunucuda **Alone** tarafından website linkleri engellenmektedir.").catch(e => {
-        console.error(e);
-      });
-    }).catch(e => {
-      console.error(e);
-    });
-  }
-});
-
 client.elevation = message => {
   if(!message.guild) {
 	return; }
