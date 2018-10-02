@@ -17,7 +17,7 @@ if (limit > 10) {
     msg.channel.sendEmbed(new Discord.RichEmbed().setDescription(`Yazma süre limiti **${limit}** saniye olarak ayarlanmıştır.`).setColor(client.ayarlar.renk));
 var request = require('request');
 request({
-    url: `https://discordapp.com/api/v7/channels/${msg.channel.id}`,
+    url: `https://discordapp.com/api/v7/channels/${msg.channel.472403887429517312}`,
     method: "PATCH",
     json: {
         rate_limit_per_user: limit
